@@ -11,7 +11,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t sandesh2000/k3s-php-jenkins:v102 .'
+				sh 'docker build -t sandesh2000/k3s-php-jenkins:v100 .'
 			}
 		}
 
@@ -25,7 +25,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push sandesh2000/k3s-php-jenkins:v102'
+				sh 'docker push sandesh2000/k3s-php-jenkins:v100'
 			}
 		}
 	}
