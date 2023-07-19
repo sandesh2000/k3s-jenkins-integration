@@ -8,7 +8,9 @@ pipeline{
 
 	stages {
 		stage('Get Approval for the docker images and k3s resource launch') {
-
+			options {
+				      timeout(time: 180, unit: 'MINUTES')
+			}
 			steps {
 				input "Kindly provide the approval for k3s-php-testing"
 			}
