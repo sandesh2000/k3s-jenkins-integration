@@ -7,11 +7,16 @@ pipeline{
 	}
 
 	stages {
+		stage('Get Approval for the docker images and k3s resource launch') {
 
+			steps {
+				input "Kindly provide the approval for k3s-php-testing"
+			}
+		}
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t sandesh2000/k3s-php-jenkins:v100 .'
+				sh 'docker build -t sandesh2000/k3s-php-jenkins:v10 .'
 			}
 		}
 
@@ -25,7 +30,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push sandesh2000/k3s-php-jenkins:v100'
+				sh 'docker push sandesh2000/k3s-php-jenkins:v10'
 			}
 		}
 	}
