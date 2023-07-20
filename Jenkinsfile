@@ -15,21 +15,21 @@ pipeline{
 				input "Kindly provide the approval for k3s-php-testing"
 			}
 		}
-		stage('Build') {
+		stage('Docker build image') {
 
 			steps {
 				sh 'docker build -t sandesh2000/k3s-php-jenkins:$BUILD_NUMBER .'
 			}
 		}
 
-		stage('Login') {
+		stage('Docker login') {
 
 			steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
 
-		stage('Push') {
+		stage('Docker push image') {
 
 			steps {
 				sh 'docker push sandesh2000/k3s-php-jenkins:$BUILD_NUMBER'
