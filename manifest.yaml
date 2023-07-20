@@ -12,9 +12,11 @@ spec:
       labels:
         app: php-testapp
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
       - name: php-testapp
-        image: sandesh2000/k3s-php-jenkins:$BUILD_NUMBER
+        image: sandesh2000/k3s-php-jenkins:latest
+        imagePullPolicy: "Always"
 ---
 apiVersion: v1
 kind: Service

@@ -40,6 +40,7 @@ pipeline{
 
 			steps {
 				sh 'kubectl apply -f manifest.yaml'
+				sh 'kubectl set image deployment/php-k3s-deployment php-testapp=sandesh2000/k3s-php-jenkins:$BUILD_NUMBER'
 			}
 	       }
 	}
