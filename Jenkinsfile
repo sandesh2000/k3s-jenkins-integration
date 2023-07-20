@@ -18,7 +18,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t sandesh2000/k3s-php-jenkins:v10 .'
+				sh 'docker build -t sandesh2000/k3s-php-jenkins:$BUILD_NUMBER .'
 			}
 		}
 
@@ -32,9 +32,16 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push sandesh2000/k3s-php-jenkins:v10'
+				sh 'docker push sandesh2000/k3s-php-jenkins:$BUILD_NUMBER'
 			}
 		}
+
+		stage('Launch Application on k3s cluster using docker image') {
+
+			steps {
+				sh 'kubectl apply -f manifest.yaml'
+			}
+	       }
 	}
 
 	post {
