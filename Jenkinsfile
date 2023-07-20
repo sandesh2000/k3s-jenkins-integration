@@ -36,19 +36,10 @@ pipeline{
 			}
 		}
 
-		stage('Launch Application on k3s cluster using docker image') {
-
-			steps {
-				sh 'kubectl apply -f manifest.yaml'
-				sh 'kubectl set image deployment/php-k3s-deployment php-testapp=sandesh2000/k3s-php-jenkins:$BUILD_NUMBER'
-			}
-	       }
-	}
-
-	post {
-		always {
-			sh 'docker logout'
-		}
+		stage('Trigger ManifestUpdate') {
+                echo "triggering updatemanifestjob"
+                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+        }
 	}
 
 }
