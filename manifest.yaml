@@ -1,32 +1,66 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-k3s-deployment
+  name: product-test-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: php-testapp
+      app: product-testapp
   template:
     metadata:
       labels:
-        app: php-testapp
+        app: product-testapp
     spec:
       terminationGracePeriodSeconds: 30
       containers:
-      - name: php-testapp
-        image: sandesh2000/k3s-php-jenkins:34
+      - name: product-testapp
+        image: sandesh2000/productapp:latest
+        imagePullPolicy: "Always"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-testapp-service
+spec:
+  type: NodePort
+  selector:
+    app: product-testapp
+  ports:
+  - nodePort: 32100
+    port: 8080
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-test-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-testapp
+  template:
+    metadata:
+      labels:
+        app: image-testapp
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: image-testapp
+        image: sandesh2000/imageapp:latest
         imagePullPolicy: "Always"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: php-k3s-service
+  name: image-testapp-service
 spec:
   type: NodePort
   selector:
-    app: php-testapp
+    app: image-testapp
   ports:
-  - nodePort: 32169
-    port: 8081
+  - nodePort: 32101
+    port: 8080
     targetPort: 80
