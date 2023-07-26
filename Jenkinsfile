@@ -36,7 +36,8 @@ pipeline{
 			}
 		}
 		stage('Update Manifest file k3s') {
-            steps {
+            script {
+						
 						sh "cat manifest.yaml"
                         sh "sed -i 's+sandesh2000/k3s-php-jenkins.*+sandesh2000/k3s-php-jenkins:${DOCKERTAG}+g' manifest.yaml"
                         sh "cat manifest.yaml"
