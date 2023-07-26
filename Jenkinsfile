@@ -40,7 +40,7 @@ pipeline{
 						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     	withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 						sh "cat manifest.yaml"
-                        sh "sed -i 's+sandesh2000/k3s-php-jenkins.*+sandesh2000/k3s-php-jenkins:${DOCKERTAG}+g' manifest.yaml"
+                        sh "sed -i 's+sandesh2000/k3s-php-jenkins.*+sandesh2000/k3s-php-jenkins:${env.BUILD_NUMBER}+g' manifest.yaml"
                         sh "cat manifest.yaml"
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
