@@ -2,5 +2,5 @@
         print "Your IP address is ".$_SERVER['REMOTE_ADDR'];
         echo "<body style='background-color:pink'>";
         echo "<br>";
-        echo "k3s cluster testing...Mindfire v10 : QA Testing"
+        echo "k3s cluster testing...Mindfire v11 : QA Testing"
 ?>
