@@ -37,7 +37,8 @@ pipeline{
 		}
 		stage('Update Manifest file k3s') {
             script {
-						
+						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    	withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 						sh "cat manifest.yaml"
                         sh "sed -i 's+sandesh2000/k3s-php-jenkins.*+sandesh2000/k3s-php-jenkins:${DOCKERTAG}+g' manifest.yaml"
                         sh "cat manifest.yaml"
@@ -46,6 +47,8 @@ pipeline{
                         sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/k3s-jenkins-integration.git HEAD:master"
     
   					}
+				}
+			}
 		}
 	}
 
