@@ -44,7 +44,7 @@ pipeline{
 			}	
         }
 		stage('Update Manifest file k3s') {
-            script {
+            steps {
                 
                         sh "git config user.email sandesh174@gmail.com"
                         sh "git config user.name sandesh2000"
