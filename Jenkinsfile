@@ -36,7 +36,7 @@ pipeline{
 			}
 		}
 		stage('Update Manifest file k3s') {
-            script {
+            steps {
 						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     	withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 						sh "cat manifest.yaml"
