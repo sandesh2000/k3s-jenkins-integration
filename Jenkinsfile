@@ -43,6 +43,21 @@ pipeline{
                 build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
 			}	
         }
+		stage('Update Manifest file k3s') {
+            script {
+                
+                        sh "git config user.email sandesh174@gmail.com"
+                        sh "git config user.name sandesh2000"
+                    
+                        sh "cat manifest.yaml"
+                        sh "sed -i 's+sandesh2000/k3s-php-jenkins.*+sandesh2000/k3s-php-jenkins:${DOCKERTAG}+g' manifest.yaml"
+                        sh "cat manifest.yaml"
+                        sh "git add ."
+                        sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/k3s-jenkins-integration.git HEAD:master"
+    
+  					}
+		}
 	}
 
 }
