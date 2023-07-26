@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: php-testapp
-        image: sandesh2000/k3s-php-jenkins:32
+        image: sandesh2000/k3s-php-jenkins:30
         imagePullPolicy: "Always"
 ---
 apiVersion: v1
