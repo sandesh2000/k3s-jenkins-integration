@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: product-testapp
-        image: sandesh2000/productapp:37
+        image: sandesh2000/productapp:38
         imagePullPolicy: "Always"
 ---
 
@@ -49,7 +49,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: image-testapp
-        image: sandesh2000/imageapp:37
+        image: sandesh2000/imageapp:38
         imagePullPolicy: "Always"
 ---
 apiVersion: v1
