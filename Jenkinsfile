@@ -30,14 +30,14 @@ pipeline{
 			}
 		}
 
-		stage('Docker push image') {
+		stage('Docker push images : Product App & Image App') {
 
 			steps {
 				sh 'docker push sandesh2000/productapp:$BUILD_NUMBER'
 				sh 'docker push sandesh2000/imageapp:$BUILD_NUMBER'
 			}
 		}
-		stage('Update Manifest file k3s') {
+		stage('Update docker image tag in k3s cluster Manifest file') {
             steps {
 						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     	withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
